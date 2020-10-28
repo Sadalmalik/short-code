@@ -10,23 +10,47 @@ var E=function( I )
 	var tokens	=	I.split(/[\s\n]+/);
 	var create = function(content){return function(){	tokens = content.concat(tokens);	return 'execute';	}}
 	while (typeof (token = tokens.shift()) !== 'undefined')
-		{	//	And i think we can destroy this cycle too...
+	{	//	And i think we can destroy this cycle too...
 		console.log( '	'+ token +'	'+ state +'	'+ require('util').inspect(STK) );
 		if( state=='definition' )
+		{
+			if(!DEF )
 			{
-			if(!DEF )	{	DEF={name:token,content:[]};	}
-			else{	if (token==';')	{	DIT[DEF.name] = create(DEF.content);	DEF=null;	state='execute';	}
-					else			{	DEF.content.push(token);	}	}
+				DEF={name:token,content:[]};
 			}
-		if( state=='execute' )
+			else
 			{
+				if (token==';')
+				{
+					DIT[DEF.name] = create(DEF.content);
+					DEF=null;
+					state='execute';
+				}
+				else
+				{
+					DEF.content.push(token);
+				}
+			}
+		}
+		if( state=='execute' )
+		{
 			if (isNaN(token) && !(token in DIT))
-								{	console.error('Error: '+token+' is undefined.');	return;	}
-			if (isNaN(token))	{	state	=	DIT[token]();	}
-			else				{	STK.push(Number(token));	}
+			{
+				console.error('Error: '+token+' is undefined.');
+				return;
+			}
+			if (isNaN(token))
+			{
+				state =	DIT[token]();
+			}
+			else
+			{
+				STK.push(Number(token));
 			}
 		}
 	}
+}
+
 var U = function(arity)	{	return (STK.length < arity) && console.log('Error: stack underflow!');	}
 //	PRIMARY
 DIT[':']=function(){	return	'definition';	}
