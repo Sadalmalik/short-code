@@ -1,2 +1,2 @@
 ## Hi! I'm a good fighter!
-Here we have some short code
+Here we have some parts of random code
