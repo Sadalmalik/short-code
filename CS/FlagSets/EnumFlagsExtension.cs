@@ -1,9 +1,5 @@
 using System;
 
-// Улучшенная версия расширения из PermissionsEnum.cs
-// Теперь это generic методы!
-// И они прицепляются ко всем энумам в проекте.
-
 public static class EnumFlagsExtension
 {
 	public static bool HasFlag<T>(this T target, T flag) where T : Enum
