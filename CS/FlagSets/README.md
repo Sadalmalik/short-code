@@ -9,7 +9,7 @@
 Улучшенная версия расширения из PermissionsEnum.cs
 Теперь используются generic методы, благодаря чему нет нужны кадому новому перечислению отдельно их прописывать. Просто добавляем этот файл в проект и дальше можем спокойно писать:
 
->  MyFlagSet flags;
+>MyFlagSet flags;
 flags.SetFlag(MyFlagSet.SomeFlag);
 if (flags.HasFlag(MyFlagSet.SomeFlag))
 {
