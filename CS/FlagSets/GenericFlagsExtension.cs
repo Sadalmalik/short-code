@@ -1,6 +1,6 @@
 using System;
 
-public static class GenericEnumFlagsExtension
+public static class GenericFlagsExtension
 {
 	public static bool HasFlag<T>(this T target, T flag) where T : Enum
 	{
